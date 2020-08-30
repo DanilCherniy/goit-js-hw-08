@@ -1,40 +1,31 @@
-const countryName = "Аргентина";
-
-const CANCELED_BY_USER = "Отменено пользователем!";
-const NO_DELIVERY = "В выбранную страну доставка недоступна.";
-const CHINA = "Китай";
-const AUSTRALIA = "Австралия";
-const INDIA = "Индия";
-const JAMAICA = "Ямайка";
-let message;
-let price = 0;
-let country;
-if (countryName === null) {
-  message = CANCELED_BY_USER;
-} else {
-  country = countryName.toUpperCase()[0] + countryName.toLowerCase().slice(1); // Write code on this line
-  switch (country) {
-    case CHINA:
-      price = 100;
-      break;
-    case AUSTRALIA:
-      price = 170;
-      break;
-    case INDIA:
-      price = 80;
-      break;
-    case JAMAICA:
-      price = 120;
-      break;
-    // Write code under this line
+function getAllPropValues(array, prop) {
+  'use strict';
+  // Write code under this line
+  let arrayResult = [];
+  for (const product of array) {
+    if (prop in product) {
+      arrayResult.push(product[prop]);
+    }
   }
+  return arrayResult;
 }
-if (price) {
-  // Write code on this line
-  message = `Доставка в ${country} будет стоить ${price} кредитов`;
-} else if (countryName == null) {
-  message = CANCELED_BY_USER;
-} else {
-  message = NO_DELIVERY;
-}
-console.log(message);
+
+// Объекты и ожидаемый результат
+const products = [
+  { name: 'Радар', price: 1300, quantity: 4 },
+  { name: 'Радар', price: 1280, quantity: 2 },
+  { name: 'Радар', price: 1320, quantity: 1 },
+  { name: 'Сканер', price: 2700, quantity: 1 },
+  { name: 'Сканер', price: 2500, quantity: 3 },
+  { name: 'Дроид', price: 400, quantity: 7 },
+  { name: 'Захват', price: 1200, quantity: 2 },
+];
+
+console.log(getAllPropValues(products, 'name'));
+// ['Радар', 'Радар', 'Радар', 'Сканер', 'Сканер', 'Дроид', 'Захват']
+
+console.log(getAllPropValues(products, 'quantity'));
+// [4, 2, 1, 1, 3, 7, 2]
+
+console.log(getAllPropValues(products, 'category'));
+//  []

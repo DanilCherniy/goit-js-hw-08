@@ -1,26 +1,19 @@
-const stock = 100;
-const invoice = 100;
-const message =
-  invoice <= stock
-    ? "Заказ оформлен, с вами свяжется менеджер"
-    : "На складе недостаточно товаров!";
-// Write code under this line
-// if (invoice <= stock) {
-//   message = 'Заказ оформлен, с вами свяжется менеджер';
-// } else {
-//   message = 'На складе недостаточно товаров!';
-// }
+// Задача 3-2
+// Подсчет количества свойств в объекте
+// Напиши функцию countProps(obj), которая возвращает число - количество свойств в объекте.
 
-console.log(message);
+// Циклы не должны использоваться
 
-//если invoice равен 100
-// то значение message будет равно
-// 'Заказ оформлен, с вами свяжется менеджер'
+const countProps = function (obj) {
+  'use strict';
+  // Write code under this line
+  let result = Object.keys(obj).length;
 
-//если invoice равен 50
-// то значение message будет равно
-// 'Заказ оформлен, с вами свяжется менеджер'
+  return result;
+};
 
-//если invoice равен 150
-// то значение message будет равно
-// 'На складе недостаточно товаров!'
+console.log(countProps({})); // 0
+
+//console.log(countProps({a:1, b:1})); // 2
+
+//console.log(countProps({a:1, b:1, c:1, d:1, e:1})); // 5

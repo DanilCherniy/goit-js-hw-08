@@ -1,51 +1,63 @@
-const userPassword = "jqueryismyjam";
+// Поиск наибольшего значения среди свойств объекта
+// Напиши функцию findBestEmployee(employees), которая
+// принимает объект сотрудников и возвращает имя самого продуктивного
+// (который выполнил больше всех задач). Сотрудники и
+//  кол-во выполненных задач содержатся как свойства объекта в формате "имя":"кол-во задач".
 
-const ADMIN_PASSWORD = "jqueryismyjam";
+// получить массив из обьекта
+// перебрать массив только по числам
+// определить наибольшее значение числа в массиве
 
-const CANCELED_BY_USER = "Отменено пользователем!";
-const ACCESS_IS_ALLOWED = "Добро пожаловать!";
+const findBestEmployee = function (employees) {
+  'use strict';
+  // Write code under this line
+  const arr = Object.entries(employees);
+  let key;
+  let tasksNumber = 0;
+  let maxTasks = 0;
+  let champion = '';
 
-const ACCESS_DENIED = "Доступ запрещен, неверный пароль!";
-let message;
+  if (arr.length === 0) {
+    return champion;
+  } else {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+        key = arr[i][0];
+        tasksNumber = Number(arr[i][1]);
 
-// Write code under this line
+        if (tasksNumber > maxTasks) {
+          maxTasks = tasksNumber;
+          champion = key;
+        }
+      }
+    }
+  }
+  return champion;
+};
 
-// switch (userPassword) {
-//   case ADMIN_PASSWORD:
-//     message = ACCESS_IS_ALLOWED;
-//     break;
+// Объекты и ожидаемый результат
+const developers = {
+  ann: 29,
+  david: 35,
+  helen: 1,
+  lorence: 99,
+};
+console.log(findBestEmployee(developers));
+// 'lorence'
 
-//   case 'null':
-//     message = CANCELED_BY_USER;
-//     break;
+const supports = {
+  poly: 12,
+  mango: 17,
+  ajax: 4,
+};
+console.log(findBestEmployee(supports));
+// 'mango'
 
-//   case '123':
-//     message = ACCESS_DENIED;
-//     break;
-
-//   default:
-//     console.log(ACCESS_DENIED);
-// }
-
-if (userPassword === ADMIN_PASSWORD) {
-  message = ACCESS_IS_ALLOWED;
-} else if (userPassword === null) {
-  message = CANCELED_BY_USER;
-} else if (userPassword === "123") {
-  message = ACCESS_DENIED;
-} else {
-  message = ACCESS_DENIED;
-}
-console.log(message);
-
-//если userPassword равно 'jqueryismyjam'
-// то значение message будет равно
-// 'Добро пожаловать!'
-
-//если userPassword равно  null
-// то значение message будет равно
-// 'Отменено пользователем!'
-
-//если userPassword равно '123'
-// то значение message будет равно
-// 'Доступ запрещен, неверный пароль!'
+const sellers = {
+  lux: 147,
+  david: 21,
+  kiwi: 19,
+  chelsy: 38,
+};
+console.log(findBestEmployee(sellers));
+// 'lux'

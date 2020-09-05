@@ -1,63 +1,34 @@
-// Поиск наибольшего значения среди свойств объекта
-// Напиши функцию findBestEmployee(employees), которая
-// принимает объект сотрудников и возвращает имя самого продуктивного
-// (который выполнил больше всех задач). Сотрудники и
-//  кол-во выполненных задач содержатся как свойства объекта в формате "имя":"кол-во задач".
+const add = (accum, element) => accum + element;
+const mult = (accum, element) => accum * element;
+const sub = (accum, element) => accum - element;
 
-// получить массив из обьекта
-// перебрать массив только по числам
-// определить наибольшее значение числа в массиве
-
-const findBestEmployee = function (employees) {
+function reduceArray(array, cb, initial) {
   'use strict';
-  // Write code under this line
-  const arr = Object.entries(employees);
-  let key;
-  let tasksNumber = 0;
-  let maxTasks = 0;
-  let champion = '';
-
-  if (arr.length === 0) {
-    return champion;
-  } else {
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < arr[i].length; j++) {
-        key = arr[i][0];
-        tasksNumber = Number(arr[i][1]);
-
-        if (tasksNumber > maxTasks) {
-          maxTasks = tasksNumber;
-          champion = key;
-        }
-      }
-    }
+  let i;
+  let accum;
+  if (arguments.length >= 3) {
+    accum = initial;
+    i = 0;
   }
-  return champion;
-};
+  if (arguments.length === 2) {
+    accum = array[0];
+    i = 1;
+  }
+  for (i; i < array.length; i += 1) {
+    const element = array[i];
+    // Write code under this line
+    accum = cb(accum, element);
+  }
+  return accum;
+}
 
-// Объекты и ожидаемый результат
-const developers = {
-  ann: 29,
-  david: 35,
-  helen: 1,
-  lorence: 99,
-};
-console.log(findBestEmployee(developers));
-// 'lorence'
+const arr = [1, 2, 3, 4, 5];
 
-const supports = {
-  poly: 12,
-  mango: 17,
-  ajax: 4,
-};
-console.log(findBestEmployee(supports));
-// 'mango'
+console.log(reduceArray(arr, add)); // 15
+console.log(reduceArray(arr, add, 10)); // 25
 
-const sellers = {
-  lux: 147,
-  david: 21,
-  kiwi: 19,
-  chelsy: 38,
-};
-console.log(findBestEmployee(sellers));
-// 'lux'
+console.log(reduceArray(arr, mult)); // 120
+console.log(reduceArray(arr, mult, 10)); // 1200
+
+console.log(reduceArray(arr, sub)); // -13
+console.log(reduceArray(arr, sub, 10)); // -5

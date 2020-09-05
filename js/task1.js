@@ -1,64 +1,24 @@
-// Задача 3-1
-// CRUD для свойств объекта
-// С - create (создать)
-// R - read (читать)
-// U - update (обновить)
-// D - delete (удалить)
-// Напиши скрипт, который, для объекта user, последовательно:
-
-// добавляет поле 'mood' со значением 'happy'
-// добавляет поле 'full time' со значением true
-// заменяет значение 'hobby' на 'skydiving'
-// заменяет значение 'premium' на false
-// в переменную message записывает содержимое объекта user:
-// для переменной keys присваивает массив свойств объекта, используя метод Object.keys()
-// с помощью оператора for...of
-// в формате ключ:значение
-// c переносом строки ('\n')
-
-//__
-
-// Напиши скрипт, который, для объекта user, последовательно:
-
-// добавляет поле mood со значением 'happy'
-// заменяет значение hobby на 'skydiving'
-// заменяет значение premium на false
-// выводит содержимое объекта user в формате ключ:значение используя Object.keys() и for...of
-// const user = {
-//   name: 'Mango',
-//   age: 20,
-//   hobby: 'html',
-//   premium: true,
-// };
-//__
-
-let message = '';
-const user = {
-  age: 20,
-  hobby: 'html',
-  name: 'Mango',
-  premium: true,
-};
-
-//Write code under this line
-user.mood = 'happy';
-user.hobby = 'skydiving';
-user.premium = false;
-user['full time'] = true;
-
-const keys = Object.keys(user);
 // Write code under this line
+const addIndex = (element, index) => element + index;
+// Write code under this line
+const subIndex = (element, index) => element - index;
 
-for (const key of keys) {
-  message += `${key} : ${user[key]}\n`;
+function mapArray(array, cb) {
+  'use strict';
+  // Write code under this line
+  const numbers = new Array(array.length);
+  for (let i = 0; i < array.length; i += 1) {
+    const element = array[i];
+    const index = i;
+    numbers[i] = cb(element, index);
+  }
+  return numbers;
 }
 
-console.log(message);
-/*
-'age : 20 
-hobby : skydiving 
-name : Mango 
-premium : false 
-mood : happy 
-"full time" : true 
-' */
+const arr = [1, 2, 3, 4, 5];
+
+console.log(mapArray(arr, addIndex));
+// [1, 3, 5, 7, 9]
+
+console.log(mapArray(arr, subIndex));
+// [1, 1, 1, 1, 1]

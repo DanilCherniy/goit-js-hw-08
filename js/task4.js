@@ -1,33 +1,37 @@
-const account = {
-  owner: 'Mango',
-  balance: 24000,
-  discount: 0.1,
-  orders: ['order-1', 'order-2', 'order-3'],
-  changeDiscount(value) {
-    this.discount = value; // Write code in this line
-  },
-  showOrders() {
-    return this.orders; // Write code in this line
-  },
-  addOrder(cost, order) {
-    this.balance -= cost; // Write code in this line
-    this.orders.push(order); // Write code in this line
-  },
-};
-const copyAccount = Object.assign({}, account);
-copyAccount.orders = [...account.orders];
-// копируем для автотестов ссылочные типы
+// Write code under this line
+class StringBuilder {
+  constructor(value) {
+    this._value = value;
+  }
 
-/*
-account.changeDiscount(0.15);
-console.log(account.discount); // 0.15
+  get value() {
+    return this._value;
+  }
 
-console.log(account.showOrders());
-// ['order-1', 'order-2', 'order-3']
+  append(str) {
+    this._value += str;
+  }
 
-account.addOrder(5000, 'order-4');
-console.log(account.balance); // 19000
+  prepend(str) {
+    this._value = str + this._value;
+  }
 
-console.log(account.showOrders());
-// ['order-1', 'order-2', 'order-3', 'order-4']
-*/
+  pad(str) {
+    this.append(str);
+    this.prepend(str);
+  }
+}
+
+console.log(typeof StringBuilder);
+// 'function'
+
+const builder = new StringBuilder('.');
+
+builder.append('^');
+console.log(builder.value); // '.^'
+
+builder.prepend('^');
+console.log(builder.value); // '^.^'
+
+builder.pad('=');
+console.log(builder.value); // '=^.^='

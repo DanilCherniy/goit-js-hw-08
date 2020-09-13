@@ -1,45 +1,79 @@
-const inventory = {
-  items: ['Knife', 'Gas mask'],
-  add(itemName) {
-    this.items.push(itemName);
-    return `Adding ${itemName} to inventory`;
-  },
-  remove(itemName) {
-    this.items = this.items.filter(item => item !== itemName);
-    return `Removing ${itemName} from inventory`;
-  },
-};
+class Car {
+  // Write code under this line
+  static getSpecs({
+    maxSpeed,
+    speed = 0,
+    isOn = false,
+    distance = 0,
+    _price,
+  } = {}) {
+    return `maxSpeed: ${maxSpeed}, speed: ${speed}, isOn: ${isOn}, distance: ${distance}, price: ${_price}`;
+  }
 
-const invokeInventoryAction = function (itemName, action) {
-  const act = action(itemName);
-  const msg = `Invoking action on ${itemName}`;
-  return { act, msg };
-};
+  constructor({ maxSpeed, speed = 0, isOn = false, distance = 0, price } = {}) {
+    this.maxSpeed = maxSpeed;
+    this.speed = speed;
+    this.isOn = isOn;
+    this.distance = distance;
+    this._price = price;
+  }
 
-const invokeAdd = invokeInventoryAction(
-  'Medkit',
-  inventory.add.bind(inventory), // Write code in this line
-);
-const arrayAdd = [...inventory.items];
-/* 
-console.log(invokeAdd);
-//{ act: 'Adding Medkit to inventory', msg: 'Invoking action on Medkit' }
+  get price() {
+    return this._price;
+  }
 
-console.log(arrayAdd);
-// ['Knife', 'Gas mask', 'Medkit']
-*/
+  set price(value) {
+    this._price = value;
+  }
 
-const invokeRemove = invokeInventoryAction(
-  'Gas mask',
-  inventory.remove.bind(inventory), // Write code in this line
-);
+  turnOn() {
+    if (!this.isOn) this.isOn = true;
+  }
+  turnOff() {
+    if (this.isOn) {
+      this.isOn = false;
+      this.speed = 0;
+    }
+  }
 
-const arrayRemove = [...inventory.items];
+  accelerate(value) {
+    if (this.isOn) {
+      const currentSpeed = this.speed + value;
+      currentSpeed <= this.maxSpeed
+        ? (this.speed += value)
+        : (this.speed = this.maxSpeed);
+    }
+  }
 
-/*
-//console.log(invokeRemove);
-//{ act: 'Removing Gas mask from inventory', msg: 'Invoking action on Gas mask' }
+  decelerate(value) {
+    if (this.isOn) {
+      const currentSpeed = this.speed - value;
+      currentSpeed >= 0 ? (this.speed -= value) : (this.speed = 0);
+    }
+  }
 
-//console.log(arrayRemove);
-// ['Knife', 'Medkit']
-*/
+  drive(hours) {
+    if (this.isOn) {
+      this.distance += this.speed * hours;
+    }
+  }
+}
+
+const mustang = new Car({ maxSpeed: 200, price: 2000 });
+mustang.turnOn();
+mustang.accelerate(50);
+mustang.drive(2);
+
+console.log(Car.getSpecs(mustang));
+// 'maxSpeed: 200, speed: 50, isOn: true, distance: 100, price: 2000'
+
+mustang.decelerate(20);
+mustang.drive(1);
+mustang.turnOff();
+
+console.log(Car.getSpecs(mustang));
+// 'maxSpeed: 200, speed: 0, isOn: false, distance: 130, price: 2000'
+
+console.log(mustang.price); // 2000
+mustang.price = 4000;
+console.log(mustang.price); // 4000

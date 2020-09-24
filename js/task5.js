@@ -1,79 +1,44 @@
-class Car {
-  // Write code under this line
-  static getSpecs({
-    maxSpeed,
-    speed = 0,
-    isOn = false,
-    distance = 0,
-    _price,
-  } = {}) {
-    return `maxSpeed: ${maxSpeed}, speed: ${speed}, isOn: ${isOn}, distance: ${distance}, price: ${_price}`;
-  }
+// Задача 6 - 5
+// find
+// Получи объект пользователя(не массив) по уникальному значению свойства email.
 
-  constructor({ maxSpeed, speed = 0, isOn = false, distance = 0, price } = {}) {
-    this.maxSpeed = maxSpeed;
-    this.speed = speed;
-    this.isOn = isOn;
-    this.distance = distance;
-    this._price = price;
-  }
+// Используй деструктурирующее присваивание для параметра функции({ email })
+// без пробелов и переносов на новую строку.
 
-  get price() {
-    return this._price;
-  }
+// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.
+// Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
 
-  set price(value) {
-    this._price = value;
-  }
+// Write code under this line
+const getUserWithEmail = (array, mail) =>
+  array.find(({ email }) => email === mail);
 
-  turnOn() {
-    if (!this.isOn) this.isOn = true;
-  }
-  turnOff() {
-    if (this.isOn) {
-      this.isOn = false;
-      this.speed = 0;
-    }
-  }
+const users = [
+  {
+    id: '150b00fb-dd82-427d-9faf-2879ea87c695',
+    name: 'Blackburn Dotson',
+    email: 'blackburndotson@furnigeer.com',
+    eyeColor: 'brown',
+    friends: ['Jacklyn Lucas', 'Linda Chapman'],
+    isActive: false,
+    balance: 1498,
+    skills: ['non', 'amet', 'ipsum'],
+    gender: 'male',
+    age: 38,
+  },
+  {
+    id: '88beb2f3-e4c2-49f3-a0a0-ecf957a95af3',
+    name: 'Ross Vazquez',
+    email: 'rossvazquez@xinware.com',
+    eyeColor: 'green',
+    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+    isActive: false,
+    balance: 3793,
+    skills: ['nulla', 'anim', 'proident', 'ipsum', 'elit'],
+    gender: 'male',
+    age: 24,
+  },
+];
 
-  accelerate(value) {
-    if (this.isOn) {
-      const currentSpeed = this.speed + value;
-      currentSpeed <= this.maxSpeed
-        ? (this.speed += value)
-        : (this.speed = this.maxSpeed);
-    }
-  }
+console.log(getUserWithEmail(users, 'rossvazquez@xinware.com'));
 
-  decelerate(value) {
-    if (this.isOn) {
-      const currentSpeed = this.speed - value;
-      currentSpeed >= 0 ? (this.speed -= value) : (this.speed = 0);
-    }
-  }
-
-  drive(hours) {
-    if (this.isOn) {
-      this.distance += this.speed * hours;
-    }
-  }
-}
-
-const mustang = new Car({ maxSpeed: 200, price: 2000 });
-mustang.turnOn();
-mustang.accelerate(50);
-mustang.drive(2);
-
-console.log(Car.getSpecs(mustang));
-// 'maxSpeed: 200, speed: 50, isOn: true, distance: 100, price: 2000'
-
-mustang.decelerate(20);
-mustang.drive(1);
-mustang.turnOff();
-
-console.log(Car.getSpecs(mustang));
-// 'maxSpeed: 200, speed: 0, isOn: false, distance: 130, price: 2000'
-
-console.log(mustang.price); // 2000
-mustang.price = 4000;
-console.log(mustang.price); // 4000
+console.log(getUserWithEmail(users, 'blackburndotson@furnigeer.com'));

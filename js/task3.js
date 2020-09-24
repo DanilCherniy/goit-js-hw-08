@@ -1,53 +1,22 @@
+// Задача 6 - 3
+// filter, map
+// Получи массив имен пользователей(значение свойства name) по полу(значение свойства gender).
+
+// Используй деструктурирующее присваивание для параметра функции({ name })
+// без пробелов и переносов на новую строку.
+
+// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.
+// Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
+
 // Write code under this line
-class Storage {
-  constructor(items = []) {
-    this.items = items;
-  }
+const getUsersWithGender = (array, gender) =>
+  array.filter(user => user.gender === gender).map(({ name }) => name);
 
-  getItems() {
-    return this.items;
-  }
+console.log(getUsersWithGender(users, 'male'));
 
-  addItem(item) {
-    this.items.push(item);
-  }
-
-  removeItem(item) {
-    const indexOfDelete = this.items.indexOf(item);
-    this.items.splice(indexOfDelete, 1);
-  }
-}
-
-console.log(typeof Storage);
-// 'function'
-
-const goods = ['Нанитоиды', 'Пролонгер', 'Железные жупи', 'Антигравитатор'];
-
-const storage = new Storage(goods);
-
-console.log(storage.getItems());
 /* [
-  'Нанитоиды',
-  'Пролонгер',
-  'Железные жупи',
-  'Антигравитатор'
-] */
-
-storage.addItem('Дроид');
-console.log(storage.getItems());
-/* [
-  'Нанитоиды',
-  'Пролонгер',
-  'Железные жупи',
-  'Антигравитатор',
-  'Дроид'
-] */
-
-storage.removeItem('Пролонгер');
-console.log(storage.getItems());
-/* [
-  'Нанитоиды',
-  'Железные жупи',
-  'Антигравитатор',
-  'Дроид'
+  "Moore Hensley",
+  "Ross Vazquez",
+  "Carey Barr",
+  "Blackburn Dotson"
 ] */

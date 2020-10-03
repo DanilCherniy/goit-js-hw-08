@@ -1,15 +1,16 @@
-// Задача 6 - 7
-// reduce
-// Получи общую сумму баланса(сумму значений свойства balance) всех пользователей.
+// Напиши скрипт, который реагирует на изменение значения input#font - size - control(событие input)
+// и изменяет инлайн - стиль span#text обновляя свойство font - size.
+// В результате при перетаскивании ползунка будет меняться размер текста.
 
-// Используй деструктурирующее присваивание для параметра функции { balance } без пробелов и переносов на новую строку
+const inputRef = document.querySelector('#font-size-control');
+const outputRef = document.querySelector('#text');
 
-// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.
-// Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
-
-// Write code under this line
-const calculateTotalBalance = array =>
-  array.reduce((acc, { balance }) => acc + balance, 0);
-
-console.log(calculateTotalBalance(users));
-// 20916
+inputRef.addEventListener('input', () => {
+  outputRef.style.fontSize = `${Number(inputRef.value) * 2}%`;
+  console.log(
+    'inputRef.value = ',
+    inputRef.value,
+    '   font-size:',
+    outputRef.style.fontSize,
+  );
+});

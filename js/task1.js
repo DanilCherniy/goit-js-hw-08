@@ -1,40 +1,29 @@
-// Задача 6 - 1
-// map
-// Получи массив имен всех пользователей(свойство name),
-// используя деструктурирующее присваивание для параметра функции({ name }) без пробелов и переносов на новую строку.
+// 1. Посчитает и выведет в консоль количество категорий в ul#categories, то есть элементов li.item.
+//    Получится 'В списке 3 категории.'
+const categoriesRef = document.querySelectorAll('.item');
 
-// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.
-// Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
+console.log(`В списке ${categoriesRef.length} категории.`);
 
-// Деструктурирующее присваивание для параметра функции
-// PS Деструктурирующее присваивание(ДП):
+// 2. Для каждого элемента li.item в списке ul#categories, найдет и выведет в консоль текст заголовка элемента(тега h2) и
+//    количество элементов в категории(всех вложенных в него элементов li).
+//    Например для первой категории получится:
+//    Категория: Животные
+//    Количество элементов: 4
 
-// Объект как параметр без ДП
-// const object = { num: 2 }
-// function getNum(obj) { return obj.num; }
-// console.log(getNum(object)) // 2
-// ДП
-// const object = { num: 2 }
-// // const num  =  object.num;
-// const { num } = object;
-// console.log(num) // 2
-// Объект как параметр c ДП
-// const object = { num: 2 }
-// //function getNum (obj) { return obj.num; }
-// function getNum({ num }) { return num; }
-// console.log(getNum(object)) // 2
+// Old school
+// for (const category of categoriesRef) {
+//   console.log(
+//     `${category.querySelector('h2').textContent} - ${category.querySelectorAll('li').length}.`,
+//   );
+// }
 
-// Write code under this line
-const getUserNames = users => users.map(({name}) => name);
+const categoriesTitleAndCount = Array.from(categoriesRef)
+  .map(
+    category =>
+      `Категория: ${
+        category.querySelector('h2').textContent
+      }\nКоличество элементов:${category.querySelectorAll('li').length}`,
+  )
+  .join('\n\n');
 
-console.log(getUserNames(users));
-
-/* [
-  "Moore Hensley",
-  "Sharlene Bush",
-  "Ross Vazquez",
-  "Elma Head",
-  "Carey Barr",
-  "Blackburn Dotson",
-  "Sheree Anthony",
-] */
+console.log(categoriesTitleAndCount);

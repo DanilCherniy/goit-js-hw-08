@@ -1,44 +1,11 @@
-// Задача 6 - 5
-// find
-// Получи объект пользователя(не массив) по уникальному значению свойства email.
+// Напиши скрипт который, при наборе текста в инпуте input#name - input(событие input),
+// подставляет его текущее значение в span#name - output.Если инпут пустой,
+// в спане должна отображаться строка 'незнакомец'.
 
-// Используй деструктурирующее присваивание для параметра функции({ email })
-// без пробелов и переносов на новую строку.
+const inputRef = document.querySelector('#name-input');
+const outputRef = document.querySelector('#name-output');
 
-// Используй только перебирающие методы массива которые не изменяют(не мутируют) исходный массив.
-// Т.е.нельзя использовать for, splice, push и т.п.мутирующие методы.
-
-// Write code under this line
-const getUserWithEmail = (array, mail) =>
-  array.find(({ email }) => email === mail);
-
-const users = [
-  {
-    id: '150b00fb-dd82-427d-9faf-2879ea87c695',
-    name: 'Blackburn Dotson',
-    email: 'blackburndotson@furnigeer.com',
-    eyeColor: 'brown',
-    friends: ['Jacklyn Lucas', 'Linda Chapman'],
-    isActive: false,
-    balance: 1498,
-    skills: ['non', 'amet', 'ipsum'],
-    gender: 'male',
-    age: 38,
-  },
-  {
-    id: '88beb2f3-e4c2-49f3-a0a0-ecf957a95af3',
-    name: 'Ross Vazquez',
-    email: 'rossvazquez@xinware.com',
-    eyeColor: 'green',
-    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
-    isActive: false,
-    balance: 3793,
-    skills: ['nulla', 'anim', 'proident', 'ipsum', 'elit'],
-    gender: 'male',
-    age: 24,
-  },
-];
-
-console.log(getUserWithEmail(users, 'rossvazquez@xinware.com'));
-
-console.log(getUserWithEmail(users, 'blackburndotson@furnigeer.com'));
+inputRef.addEventListener('input', () => {
+  outputRef.textContent = inputRef.value === '' ? 'незнакомец' : inputRef.value;
+  console.log(outputRef.textContent);
+});
